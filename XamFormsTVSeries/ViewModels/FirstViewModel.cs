@@ -33,13 +33,14 @@ namespace XamFormsTVSeries.ViewModels
 			}
 			set {
 				_SearchText = value;
-				RaisePropertyChanged();
+                ExecuteSearchByNameCommand();
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region CharacterList
+        #region CharacterList
+        private List<TVShowItemViewModel> CharacterCopy;
 
 		private List<TVShowItemViewModel> _CharacterList;
 
@@ -68,7 +69,15 @@ namespace XamFormsTVSeries.ViewModels
 
 		private async Task ExecuteSearchByNameCommand ()
 		{
-			await LoadData (SearchText);
+
+            if ( string.IsNullOrEmpty(SearchText))
+            {
+                CharacterList = CharacterCopy;
+            }
+            else
+            {
+                CharacterList= CharacterCopy.Where(x => x.Name.Contains(SearchText)).ToList();
+            }
 		}
 
 		#endregion
@@ -91,6 +100,7 @@ namespace XamFormsTVSeries.ViewModels
 				}).ToList ();
 			}
 
+            CharacterCopy = CharacterList;
 			IsBusy = false;
 
 		}

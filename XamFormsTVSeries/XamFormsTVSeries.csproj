@@ -23,9 +23,6 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Controls\ImageCircle.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove=".DS_Store" />
   </ItemGroup>
 </Project>
